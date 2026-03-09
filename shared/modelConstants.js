@@ -14,6 +14,7 @@ export const CLAUDE_MODELS = {
   // Models in SDK format (what the actual SDK accepts)
   OPTIONS: [
     { value: 'sonnet', label: 'Sonnet' },
+    { value: 'system default', label: 'System Default' },  // Use Claude Code's local configuration
     { value: 'opus', label: 'Opus' },
     { value: 'haiku', label: 'Haiku' },
     { value: 'opusplan', label: 'Opus Plan' },

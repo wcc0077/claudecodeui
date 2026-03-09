@@ -184,10 +184,16 @@ function mapCliOptionsToSDK(options = {}) {
 
   sdkOptions.disallowedTools = settings.disallowedTools || [];
 
-  // Map model (default to sonnet)
+  // Map model (default to empty - use Claude Code's default)
   // Valid models: sonnet, opus, haiku, opusplan, sonnet[1m]
-  sdkOptions.model = options.model || CLAUDE_MODELS.DEFAULT;
-  console.log(`Using model: ${sdkOptions.model}`);
+  if (options.model && options.model !== 'system default') {
+    sdkOptions.model = options.model;
+    console.log(`Using model: ${sdkOptions.model}`);
+  } else {
+    console.log('Using Claude Code default model (not overriding)');
+    // Explicitly ensure model is not set to undefined or 'system default'
+    delete sdkOptions.model;
+  }
 
   // Map system prompt configuration
   sdkOptions.systemPrompt = {
