@@ -6,6 +6,66 @@
 - npm >= 9.x
 - Git
 
+## 方式一：PM2 生产部署（推荐）
+
+### 1. 安装 PM2
+
+```bash
+npm install -g pm2
+```
+
+### 2. 一键部署
+
+**Linux/macOS:**
+
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+**Windows:**
+
+```bash
+deploy.bat
+```
+
+### 3. 手动部署（可选）
+
+```bash
+# 安装依赖
+npm install --production
+
+# 构建项目
+npm run build
+
+# 启动应用
+pm2 start ecosystem.config.js
+
+# 保存 PM2 配置（开机自启）
+pm2 save
+```
+
+### 4. PM2 常用命令
+
+```bash
+pm2 status              # 查看应用状态
+pm2 logs claudecodeui   # 查看日志
+pm2 restart claudecodeui # 重启应用
+pm2 stop claudecodeui    # 停止应用
+pm2 monit               # 实时监控
+pm2 delete claudecodeui  # 删除应用
+```
+
+### 5. 配置说明
+
+`ecosystem.config.js` 配置项：
+
+- `name`: 应用名称（claudecodeui）
+- `PORT`: 后端端口（默认 3001）
+- `max_memory_restart`: 内存限制（默认 1G，自动重启）
+- `autorestart`: 自动重启（true）
+- `logs/`: 日志目录
+
 ## 快速部署
 
 ### 1. 克隆项目
